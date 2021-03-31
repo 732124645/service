@@ -1,21 +1,16 @@
 'use strict';
 
 module.exports = {
+  // 在执行数据库升级时调用的函数，创建 SYS_USER_ROLE 表
   up: async (queryInterface, Sequelize) => {
-    /**
-     * Add altering commands here.
-     *
-     * Example:
-     * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
-     */
+    const { STRING } = Sequelize;
+    await queryInterface.createTable('SYS_USER_ROLE', {
+      user_id: { type: STRING },
+      role_id: { type: STRING },
+    });
   },
-
-  down: async (queryInterface, Sequelize) => {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
-  }
+  // 在执行数据库降级时调用的函数，删除 SYS_USER_ROLE 表
+  down: async queryInterface => {
+    await queryInterface.dropTable('SYS_USER_ROLE');
+  },
 };

@@ -1,21 +1,21 @@
 'use strict';
 
 module.exports = {
+  // 在执行数据库升级时调用的函数，创建 SYS_MENU 表
   up: async (queryInterface, Sequelize) => {
-    /**
-     * Add altering commands here.
-     *
-     * Example:
-     * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
-     */
+    const { STRING, INTEGER, DATE, UUIDV4, UUID } = Sequelize;
+    await queryInterface.createTable('SYS_MENU', {
+      menu_id: { type: UUID, primaryKey: true, defaultValue: UUIDV4 },
+      menu_name: { type: STRING, allowNull: false },
+      menu_sort: { type: INTEGER, allowNull: false },
+      parent_id: { type: INTEGER },
+      icon: { type: STRING },
+      created_at: { type: DATE },
+      updated_at: { type: DATE },
+    });
   },
-
-  down: async (queryInterface, Sequelize) => {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
-  }
+  // 在执行数据库降级时调用的函数，删除 SYS_MENU 表
+  down: async queryInterface => {
+    await queryInterface.dropTable('SYS_MENU');
+  },
 };
