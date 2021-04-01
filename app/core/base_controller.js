@@ -3,8 +3,8 @@
 const { Controller } = require('egg');
 const errInfo = require('./ErrorInfo');
 class BaseController extends Controller {
-  get user() {
-    return this.ctx.session.user;
+  get userInfo() {
+    return this.ctx.session.userInfo;
   }
 
   success(code = 200, message = 'success', data = {}) {
@@ -17,7 +17,7 @@ class BaseController extends Controller {
   }
 
   error(key) {
-    this.ctx.body(key ? errInfo[key] : { code: 500, message: 'error' });
+    this.ctx.body = key ? errInfo[key] : { code: 500, message: 'error' };
   }
 
   notFound(msg) {

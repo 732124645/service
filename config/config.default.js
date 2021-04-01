@@ -16,7 +16,10 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1617075020828_5201';
 
   // add your middleware config here
-  config.middleware = [];
+  config.middleware = [ 'gzip', 'loginCheck' ];
+  config.gzip = {
+    threshold: 1024, // 小于 1k 的响应体不压缩
+  };
 
   config.security = {
     headerName: 'x-csrf-token', // 自定义请求头
@@ -47,6 +50,13 @@ module.exports = appInfo => {
     agent: true,
   };
 
+  config.sessionRedis = {
+    key: 'SYS_SESSION',
+    maxAge: 24 * 3600 * 1000,
+    httpOnly: true,
+    encrype: false,
+  };
+
   config.sequelize = {
     dialect: 'mysql', // support: mysql, mariadb, postgres, mssql
     database: 'start_default',
@@ -66,7 +76,7 @@ module.exports = appInfo => {
 
   // add your user config here
   const userConfig = {
-    // myAppName: 'egg',
+    myAppName: 'egg',
   };
 
   return {

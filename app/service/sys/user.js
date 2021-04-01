@@ -20,7 +20,7 @@ class UserService extends Service {
     });
     if (result == null) {
       // 未找到
-      return result;
+      return false;
     }
 
     return result;
