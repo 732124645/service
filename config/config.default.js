@@ -19,11 +19,18 @@ module.exports = appInfo => {
   config.middleware = [];
 
   config.security = {
+    headerName: 'x-csrf-token', // 自定义请求头
+    // 判断是否需要 ignore 的方法，请求上下文 context 作为第一个参数
     csrf: {
-      headerName: 'x-csrf-token', // 自定义请求头
+      // 判断是否需要 ignore 的方法，请求上下文 context 作为第一个参数
+      ignore: ctx => {
+        if (ctx.request.url === '/login') {
+          return true;
+        }
+        return false;
+      },
     },
   };
-
   config.exports = {
     session: {
       renew: true,
@@ -43,10 +50,10 @@ module.exports = appInfo => {
   config.sequelize = {
     dialect: 'mysql', // support: mysql, mariadb, postgres, mssql
     database: 'start_default',
-    host: 'localhost',
+    host: '121.4.75.191',
     port: 3306,
     username: 'root',
-    password: 'root',
+    password: '123456',
     define: {
       underscored: true,
       freezeTableName: true,

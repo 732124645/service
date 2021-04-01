@@ -1,6 +1,7 @@
 'use strict';
 
 const Controller = require('egg').Controller;
+const { genPassword } = require('../../utils/cryp'); // md5 加密
 
 function toInt(str) {
   if (typeof str === 'number') return str;
@@ -27,10 +28,11 @@ class authUserController extends Controller {
   async create() {
     const { ctx } = this;
     const { user_name, nick_name, password, email, phone } = ctx.request.body;
+    const newPwd = genPassword(password);
     const user = await ctx.model.Sys.User.create({
       user_name,
       nick_name,
-      password,
+      password: newPwd,
       email,
       phone,
     });
@@ -75,11 +77,12 @@ class authUserController extends Controller {
     }
 
     const { user_name, nick_name, password, email, phone } = ctx.request.body;
+    const newPwd = genPassword(password);
     ctx.body = user;
     await user.update({
       user_name,
       nick_name,
-      password,
+      password: newPwd,
       email,
       phone,
     });

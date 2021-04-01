@@ -3,7 +3,7 @@
 module.exports = app => {
   const { STRING, DATE, BOOLEAN, UUIDV4, UUID } = app.Sequelize;
 
-  const user = app.model.define('sys_user', {
+  const user = app.model.define('SYS_USER', {
     user_id: { type: UUID, primaryKey: true, defaultValue: UUIDV4 },
     user_name: { type: STRING, allowNull: false },
     nick_name: { type: STRING, allowNull: false },
