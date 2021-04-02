@@ -23,7 +23,8 @@ module.exports = app => {
   router.put('/sys/role/:id', controller.sys.role.update); // 修改角色详情
 
   /* 菜单 */
-  router.get('/sys/menu', controller.sys.role.index); // 角色列表
+  router.get('/sys/menu', controller.sys.menu.index); // 菜单列表
+  router.post('/sys/menu', controller.sys.menu.create); // 新建菜单
 
   /* passport */
   router.post('/login', controller.sys.passport.login); // 登录

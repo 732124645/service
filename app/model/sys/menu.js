@@ -6,7 +6,8 @@ module.exports = app => {
   const menu = app.model.define('SYS_USER', {
     menu_id: { type: UUID, primaryKey: true, defaultValue: UUIDV4 },
     menu_sort: { type: INTEGER, allowNull: false },
-    parent_id: { type: INTEGER },
+    parent_id: { type: STRING },
+    component: { type: STRING },
     name: { type: STRING, allowNull: false },
     path: { type: STRING, allowNull: false },
     icon: { type: STRING },

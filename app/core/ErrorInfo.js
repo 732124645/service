@@ -55,4 +55,9 @@ module.exports = {
     code: 10010,
     message: '删除用户失败',
   },
+  // 操作失败
+  operationFailure: {
+    code: 10011,
+    message: '操作失败',
+  },
 };

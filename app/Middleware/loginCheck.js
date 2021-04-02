@@ -13,15 +13,17 @@ module.exports = () => {
       // 对比redis信息
       const result = ctx.session.userInfo;
       if (result == null) {
-        this.error('loginCheckFailInfo');
-      } else {
-        await next();
-        return;
+        return (ctx.body = {
+          code: 10005,
+          message: '您尚未登录',
+        });
       }
-    } else {
-      return this.error('loginCheckFailInfo');
+      await next();
+      return;
     }
-
+    return (ctx.body = {
+      code: 10005,
+      message: '您尚未登录',
+    });
   };
 };
-

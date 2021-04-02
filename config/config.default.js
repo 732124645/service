@@ -17,6 +17,9 @@ module.exports = appInfo => {
 
   // add your middleware config here
   config.middleware = [ 'gzip', 'loginCheck' ];
+  config.loginCheck = {
+    ignore: [ '/login' ], // 忽略注册和登陆的接口
+  };
   config.gzip = {
     threshold: 1024, // 小于 1k 的响应体不压缩
   };
@@ -52,7 +55,7 @@ module.exports = appInfo => {
 
   config.sessionRedis = {
     key: 'SYS_SESSION',
-    maxAge: 24 * 3600 * 1000,
+    maxAge: 30 * 60 * 1000,
     httpOnly: true,
     encrype: false,
   };
@@ -60,10 +63,10 @@ module.exports = appInfo => {
   config.sequelize = {
     dialect: 'mysql', // support: mysql, mariadb, postgres, mssql
     database: 'start_default',
-    host: '121.4.75.191',
+    host: '127.0.0.1',
     port: 3306,
     username: 'root',
-    password: '123456',
+    password: 'root',
     define: {
       underscored: true,
       freezeTableName: true,
